@@ -1,20 +1,17 @@
-def apt(floor, ho):
-    if floor == 0:
-        return ho
-    elif floor > 0:
-        middleSum = 0
-        for j in range(1, ho+1):        # 1층 ~ ho층까지 반복
-            middleSum = middleSum + apt(floor-1, j)
+people = [[0]*15 for _ in range(15)]
 
-        return middleSum
-
+for pp in range(1, 15):
+    people[0][pp] = pp
 
 for t in range(int(input())):
     floor = int(input())
     ho = int(input())
     sum = 0
 
-    for i in range(1, ho+1):
-        sum = sum + apt(floor-1, i)
+    for i in range(0, floor+1):
+        for j in range(1, ho+1):
+            if people[i][j] == 0:   # 아직 값 저장 전
+                for k in range(1, j+1):
+                    people[i][j] += people[i-1][k]
 
-    print(sum)
+    print(people[floor][ho])

@@ -1,4 +1,8 @@
+import sys
+
 lst = []
+input = sys.stdin.readline
+
 for nn in range(int(input())):
     lst.append(int(input()))
 

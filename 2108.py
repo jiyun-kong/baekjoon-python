@@ -9,34 +9,33 @@ maxLst = []
 for _ in range(n):
     lst.append(int(input()))
 
-# # 산술평균
-# print(round(sum(lst) / n))
+# 산술평균
+print(round(sum(lst) / n))
 
-# # 중앙값
-# lst.sort()
-# print(lst[n//2])
+
+# 중앙값
+lst.sort()
+print(lst[n//2])
+
 
 # 최빈값
-for i in range(n):
+i = 0
+while True:
+    if i >= n:
+        break
+
     count = lst.count(lst[i])
     countLst.append((lst[i], count))
-print("countLst : ", countLst)
-max = 0
-for j in range(len(countLst)):
-    if max < countLst[j][1]:
-        max = countLst[j][1]
-        maxElement = countLst[j][0]
+    i += count
 
-        if maxElement not in maxLst:
-            maxLst.append(maxElement)
-print("before sorting maxLst : ", maxLst)
-maxLst.sort(reverse=True)
-print("after sorting maxLst : ", maxLst)
+sorted(countLst, key=lambda x: (x[0], -x[1]))
 
-if len(maxLst) > 1:
-    print(maxLst[1])
+if len(countLst) == 1:
+    print(countLst[0][0])
+elif countLst[0][1] == countLst[1][1]:
+    print(countLst[1][0])
 else:
-    print(maxLst[0])
+    print(countLst[0][0])
 
-# # 범위
-# print(max(lst) - min(lst))
+# 범위
+print(max(lst) - min(lst))

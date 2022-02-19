@@ -1,36 +1,41 @@
 import sys
 input = sys.stdin.readline
 
-n = int(input())  # n은 홀수
+n = int(input())
 lst = []
-countLst = []
-maxLst = []
 
 for _ in range(n):
     lst.append(int(input()))
+
+countLst = []
+lst.sort()
 
 # 산술평균
 print(round(sum(lst) / n))
 
 
 # 중앙값
-lst.sort()
 print(lst[n//2])
 
 
 # 최빈값
 i = 0
-while True:
-    if i >= n:
-        break
+while i < n:
+    count = 1
+    val = lst[i]
 
-    count = lst.count(lst[i])
-    countLst.append((lst[i], count))
+    for j in range(i+1, n, 1):
+        if val == lst[j]:
+            count += 1
+        else:
+            break
     i += count
+    countLst.append([val, count])
 
-sorted(countLst, key=lambda x: (x[0], -x[1]))
 
-if len(countLst) == 1:
+countLst.sort(key=lambda x: (-x[1], x[0]))
+
+if n == 1:
     print(countLst[0][0])
 elif countLst[0][1] == countLst[1][1]:
     print(countLst[1][0])

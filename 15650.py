@@ -1,20 +1,21 @@
 n, m = map(int, input().split(' '))
 
-used = [False] * (n+1)
-used[0] = True
 arr = []
 
 
-def nm():
+def nm(start):
     if len(arr) == m:
         print(' '.join(map(str, arr)))
     else:
-        for i in range(1, n+1):
-            if used[i] == False:
-                used[i] = True
+        for i in range(start, n+1):
+            if i not in arr:
                 arr.append(i)
-                nm()
+                print("arr : ", arr, "\tstart : ", start, "\ti : ", i)
+                print("nm(", i+1, ")")
+                nm(i + 1)
                 arr.pop()
+                print("pop()")
 
 
-nm()
+start = 1
+nm(start)

@@ -1,18 +1,28 @@
 n = int(input())
-lst = []          # 좌표들 저장하는 리스트
-correct = []      # 완성된 좌표들 저장하는 리스트
-count = 0         # 가능한 경우의 수
-used = [[False for col in range(n)] for row in range(n)]    # 사용된 좌표인지 판단하는 리스트
 
-for i in range(n):
-    for j in range(n):
-        lst.append([i, j])
+arr = [0]*n
+ans = 0         # 가능한 경우의 수
 
 
-def queens():
-    if len(correct) == n:
-        count += 1
+def isOkay(col):
+    for i in range(col):
+        if abs(arr[i] - arr[col]) == abs(i - col) or arr[i] == arr[col]:
+            return False
+
+    return True
+
+
+def queens(col):
+    global ans
+    if col == n:
+        ans += 1
     else:
-        for posX, posY in lst:
-            if used[posX][posY] == False:
-                lst.append([posX, posY])
+        for i in range(n):
+            arr[col] = i
+
+            if isOkay(col):
+                queens(col+1)
+
+
+queens(0)
+print(ans)
